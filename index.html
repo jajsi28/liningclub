@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lining Club - Just Do It</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- New small stylesheet for the top-centered search (keeps main styles shorter) -->
+    <link rel="stylesheet" href="top-search.css">
     <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -16,6 +18,9 @@
                     <img src="project/assets/Lining-Club-Logo.jpg" alt="Lining Club Logo" class="logo">     
                 </a>
             </div>
+
+            <!-- Centered admin/search area moved below nav visually via separate top-search section,
+                 but keep an admin link in the nav for quick access -->
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="men.html" class="nav-link">Men</a></li>
@@ -23,14 +28,36 @@
                 <li><a href="kids.html" class="nav-link">Kids</a></li>
                 <li><a href="sale.html" class="nav-link">Sale</a></li>
                 <li><a href="snkrs.html" class="nav-link">SNKRS</a></li>
+                <li><a href="admin-login.html" class="nav-link nav-admin-link">Admin</a></li>
             </ul>
             <div class="nav-actions">
+                <a href="login.html" class="nav-link" style="margin-right:0.6rem;">Нэвтрэх</a>
+                <a href="signup.html" class="nav-link" style="margin-right:1rem;">Бүртгүүлэх</a>
                 <div class="search-icon">🔍</div>
                 <div class="cart-icon">🛒</div>
                 <div class="profile-icon">👤</div>
+                <div class="hamburger" onclick="toggleMobileMenu()" aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </div>
             </div>
         </div>
     </nav>
+
+    <!-- Top-centered beautiful search + quick admin panel link -->
+    <section class="top-search" aria-label="Quick search">
+        <div class="container">
+            <div class="search-box">
+                <form id="mainSearchForm" onsubmit="runSearch(document.getElementById('mainSearchInput').value); return false;" role="search">
+                    <input id="mainSearchInput" class="search-input" type="search" placeholder="Хайх: бүтээгдэхүүн, төрөл..." aria-label="Search products">
+                    <button type="submit" class="search-btn">Хайх</button>
+                </form>
+                <div class="top-search-actions">
+                    <a href="admin.html" class="btn-admin" title="Admin panel (demo)">Admin Панель</a>
+                    <a href="catalog.html" class="btn-view-all">Бүх бүтээгдэхүүн үзэх</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Hero Section -->
     <section class="hero">
