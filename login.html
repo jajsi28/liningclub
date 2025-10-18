@@ -1,72 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Lining Club</title>
+    <title>Нэвтрэх - Lining Club</title>
+
+    <!-- Main styles -->
     <link rel="stylesheet" href="styles.css">
+    <!-- Auth page styles -->
     <link rel="stylesheet" href="auth.css">
+    <!-- Toast notification styles -->
+    <link rel="stylesheet" href="toast.css">
+    <!-- Google font -->
     <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="auth-container">
-        <form class="auth-form" id="loginForm">
-            <h2>Login to Your Account</h2>
-            <div class="form-group">
-                <label for="login-email">Email</label>
-                <input type="email" id="login-email" name="email" required autocomplete="username">
+    <!-- Header / Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html"><img src="project/assets/Lining-Club-Logo.jpg" alt="Lining Club" class="logo"></a>
             </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Нүүр</a></li>
+                <li><a href="men.html" class="nav-link">Men</a></li>
+                <li><a href="women.html" class="nav-link">Women</a></li>
+            </ul>
+            <!-- nav-actions will be injected dynamically by script.js (login/signup or profile etc.) -->
+        </div>
+    </nav>
+
+    <!-- Auth form -->
+    <div class="auth-container">
+        <form class="auth-form" id="loginForm" aria-label="Нэвтрэх форм">
+            <h2>Нэвтрэх</h2>
+
+            <div class="form-group">
+                <label for="login-email">Имэйл</label>
+                <input type="email" id="login-email" name="email" required autocomplete="username" placeholder="example@mail.com">
+            </div>
+
             <div class="form-group">
                 <label for="login-password">Нууц үг</label>
-                <input type="password" id="login-password" name="password" required autocomplete="current-password">
+                <input type="password" id="login-password" name="password" required autocomplete="current-password" placeholder="••••••••">
             </div>
+
             <button type="submit" class="btn-auth">Нэвтрэх</button>
+
             <div class="auth-extra">
-                <a href="signup.html">Бүртгүүлэх</a>
-                <a href="#" class="forgot-password">Нууц үгээ мартсан уу?</a>
+                <a href="signup.html">Шинээр бүртгүүлэх</a>
+                <a href="#" class="forgot-password">Нууц үгээ мартсан</a>
             </div>
         </form>
     </div>
 
-    <script>
-        // Lightweight showToast fallback in case script.js isn't loaded on this page
-        (function(){
-            if (typeof showToast === 'function') return;
-            window.showToast = function(msg, type='success', duration=2000, title='') {
-                try {
-                    // create a minimal toast in the center-bottom if no global provided
-                    const t = document.createElement('div');
-                    t.style.position = 'fixed';
-                    t.style.left = '50%';
-                    t.style.bottom = '28px';
-                    t.style.transform = 'translateX(-50%)';
-                    t.style.background = (type==='success')? 'linear-gradient(90deg,#28a745,#2ecc71)' : (type==='error')? 'linear-gradient(90deg,#ff4757,#ff6b6b)' : 'linear-gradient(90deg,#667EEA,#764BA2)';
-                    t.style.color = '#fff';
-                    t.style.padding = '12px 16px';
-                    t.style.borderRadius = '10px';
-                    t.style.boxShadow = '0 8px 24px rgba(0,0,0,0.3)';
-                    t.style.zIndex = 2000;
-                    t.style.fontWeight = 700;
-                    t.textContent = msg;
-                    document.body.appendChild(t);
-                    setTimeout(()=>{ t.style.opacity = '0'; t.addEventListener('transitionend', ()=>t.remove()); }, duration);
-                } catch(e){ alert(msg); }
-            };
-        })();
+    <!-- External scripts: toast.js must be loaded before script.js so showToast is available -->
+    <script src="toast.js"></script>
+    <script src="script.js"></script>
 
-        // Simple form validation
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('login-email').value.trim();
-            const pass = document.getElementById('login-password').value.trim();
-            if (!email || !pass) {
-                showToast('Please fill in all fields.', 'error', 2200);
-                return;
-            }
-            // Fake login: show styled toast and then redirect
-            showToast('Амжилттай нэвтэрлээ! Тавтай морилно уу.', 'success', 1500, 'Сайн байна уу!');
-            setTimeout(() => { window.location.href = "index.html"; }, 1500);
-        });
-    </script>
+    <!-- Notes:
+         - script.js contains the login handling that integrates with localStorage (liningclub_users / liningclub_current_user),
+           updates header UI (profile dropdown), and calls showToast(...) for feedback.
+         - toast.js provides animated toast notifications (toast.css styles required).
+         - If you previously had an inline showToast fallback in this file, that was removed to avoid duplicate definitions.
+         - Make sure toast.js, toast.css and script.js exist in the project root (or update paths accordingly).
+    -->
 </body>
 </html>
