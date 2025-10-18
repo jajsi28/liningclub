@@ -1,0 +1,127 @@
+/* New top-centered search and small admin button styles (add to project as top-search.css) */
+
+.top-search {
+    padding: 28px 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.75));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 84px; /* make space for fixed navbar */
+    position: relative;
+    z-index: 50;
+}
+
+.search-box {
+    width: 100%;
+    max-width: 920px;
+    background: linear-gradient(180deg, #ffffff, #fbfbfb);
+    padding: 18px;
+    border-radius: 14px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.search-box form {
+    flex: 1;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.search-input {
+    flex: 1;
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid #e6e6e6;
+    font-size: 16px;
+    outline: none;
+    background: linear-gradient(180deg, #fff, #fafafa);
+    transition: box-shadow .15s ease, transform .08s ease;
+}
+
+.search-input:focus {
+    box-shadow: 0 6px 18px rgba(102,126,234,0.14);
+    transform: translateY(-1px);
+    border-color: rgba(102,126,234,0.6);
+}
+
+.search-btn {
+    padding: 12px 18px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #667EEA, #764BA2);
+    color: #fff;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(118,75,162,0.12);
+    transition: transform .12s ease;
+}
+
+.search-btn:hover {
+    transform: translateY(-3px);
+}
+
+.top-search-actions {
+    display: flex;
+    gap: 10px;
+    margin-left: 8px;
+}
+
+.btn-admin {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: #fff;
+    color: #333;
+    border: 1px solid #eee;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all .12s ease;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+}
+
+.btn-admin:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.09);
+}
+
+.btn-view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: transparent;
+    color: #667EEA;
+    border: 1px solid rgba(102,126,234,0.12);
+    font-weight: 700;
+    text-decoration: none;
+    transition: all .12s ease;
+}
+
+.btn-view-all:hover {
+    transform: translateY(-3px);
+    background: rgba(102,126,234,0.06);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .top-search {
+        margin-top: 72px;
+        padding: 18px 10px;
+    }
+    .search-box {
+        flex-direction: column;
+        gap: 12px;
+        padding: 14px;
+    }
+    .top-search-actions {
+        justify-content: center;
+        width: 100%;
+    }
+}
