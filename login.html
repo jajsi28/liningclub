@@ -1,45 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Lining Club</title>
-    <link rel="stylesheet" href="styles.css"/>
-    <link rel="stylesheet" href="auth.css"/>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="auth.css">
     <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="auth-container">
         <form class="auth-form" id="loginForm">
-            <h2>Нэвтрэх</h2>
+            <h2>Login to Your Account</h2>
             <div class="form-group">
                 <label for="login-email">Email</label>
-                <input type="email" id="login-email" name="email" required autocomplete="username" />
+                <input type="email" id="login-email" name="email" required autocomplete="username">
             </div>
             <div class="form-group">
                 <label for="login-password">Нууц үг</label>
-                <input type="password" id="login-password" name="password" required autocomplete="current-password" />
+                <input type="password" id="login-password" name="password" required autocomplete="current-password">
             </div>
             <button type="submit" class="btn-auth">Нэвтрэх</button>
             <div class="auth-extra">
                 <a href="signup.html">Бүртгүүлэх</a>
-                <a href="#" class="forgot-password">Нууц үгээ мартсан?</a>
+                <a href="#" class="forgot-password">Нууц үгээ мартсан уу?</a>
             </div>
         </form>
     </div>
 
     <script>
-        // Demo login: accepts any non-empty credentials and redirects to homepage
+        // Lightweight showToast fallback in case script.js isn't loaded on this page
+        (function(){
+            if (typeof showToast === 'function') return;
+            window.showToast = function(msg, type='success', duration=2000, title='') {
+                try {
+                    // create a minimal toast in the center-bottom if no global provided
+                    const t = document.createElement('div');
+                    t.style.position = 'fixed';
+                    t.style.left = '50%';
+                    t.style.bottom = '28px';
+                    t.style.transform = 'translateX(-50%)';
+                    t.style.background = (type==='success')? 'linear-gradient(90deg,#28a745,#2ecc71)' : (type==='error')? 'linear-gradient(90deg,#ff4757,#ff6b6b)' : 'linear-gradient(90deg,#667EEA,#764BA2)';
+                    t.style.color = '#fff';
+                    t.style.padding = '12px 16px';
+                    t.style.borderRadius = '10px';
+                    t.style.boxShadow = '0 8px 24px rgba(0,0,0,0.3)';
+                    t.style.zIndex = 2000;
+                    t.style.fontWeight = 700;
+                    t.textContent = msg;
+                    document.body.appendChild(t);
+                    setTimeout(()=>{ t.style.opacity = '0'; t.addEventListener('transitionend', ()=>t.remove()); }, duration);
+                } catch(e){ alert(msg); }
+            };
+        })();
+
+        // Simple form validation
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const email = document.getElementById('login-email').value.trim();
             const pass = document.getElementById('login-password').value.trim();
             if (!email || !pass) {
-                alert('Бүх талбарыг бөглөнө үү');
+                showToast('Please fill in all fields.', 'error', 2200);
                 return;
             }
-            alert('Амжилттай нэвтэрлээ (Тест)!');
-            window.location.href = 'index.html';
+            // Fake login: show styled toast and then redirect
+            showToast('Амжилттай нэвтэрлээ! Тавтай морилно уу.', 'success', 1500, 'Сайн байна уу!');
+            setTimeout(() => { window.location.href = "index.html"; }, 1500);
         });
     </script>
 </body>
