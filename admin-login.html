@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Admin Login - Lining Club</title>
+    <link rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="auth.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-container">
+        <form class="auth-form" id="adminLoginForm">
+            <h2>Админ нэвтрэх</h2>
+            <div class="form-group">
+                <label for="admin-username">Нэр</label>
+                <input type="text" id="admin-username" name="username" required autocomplete="username" />
+            </div>
+            <div class="form-group">
+                <label for="admin-password">Нууц үг</label>
+                <input type="password" id="admin-password" name="password" required autocomplete="current-password" />
+            </div>
+            <button type="submit" class="btn-auth">Нэвтрэх</button>
+            <div class="auth-extra">
+                <a href="index.html">Буцах</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Demo admin credentials (change for production)
+        const ADMIN_USER = 'admin';
+        const ADMIN_PASS = 'admin123';
+
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const u = document.getElementById('admin-username').value.trim();
+            const p = document.getElementById('admin-password').value.trim();
+
+            if (u === ADMIN_USER && p === ADMIN_PASS) {
+                // store a simple demo token (for demo only, not secure)
+                sessionStorage.setItem('adminLogged', 'true');
+                alert('Админээр амжилттай нэвтэрлээ.');
+                window.location.href = 'admin.html';
+            } else {
+                alert('Нэвтрэх нэр эсвэл нууц үг буруу');
+            }
+        });
+    </script>
+</body>
+</html>
