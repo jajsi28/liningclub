@@ -1,3 +1,150 @@
+// Global toast / notification helper (added)
+// Usage: showToast('Message text', 'success'|'error'|'info', durationMs)
+(function () {
+    if (window.showToast) return; // don't re-add if already present
+
+    // Inject toast styles
+    const toastStyles = `
+    .toast-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 2000;
+        pointer-events: none;
+    }
+    .toast {
+        min-width: 260px;
+        max-width: 360px;
+        padding: 12px 14px;
+        border-radius: 12px;
+        color: #fff;
+        background: rgba(0,0,0,0.65);
+        box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+        transform-origin: right top;
+        opacity: 0;
+        transform: translateY(-8px) scale(.98);
+        transition: opacity .22s ease, transform .22s cubic-bezier(.2,.9,.3,1);
+        pointer-events: auto;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
+    .toast.show {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    .toast .toast-icon {
+        width: 40px;
+        height: 40px;
+        flex: 0 0 40px;
+        border-radius: 8px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-weight:900;
+        font-size:18px;
+        color:#fff;
+    }
+    .toast .toast-body {
+        flex: 1;
+        font-size: 14px;
+        line-height:1.2;
+    }
+    .toast.success { background: linear-gradient(90deg,#28a745,#2ecc71); }
+    .toast.error   { background: linear-gradient(90deg,#ff4757,#ff6b6b); }
+    .toast.info    { background: linear-gradient(90deg,#667EEA,#764BA2); }
+    .toast .toast-close {
+        margin-left: 8px;
+        cursor: pointer;
+        opacity: 0.85;
+        font-weight:700;
+    }
+    @media (max-width: 640px) {
+        .toast-container { left: 12px; right: 12px; top: 16px; align-items: center; }
+        .toast { width: calc(100% - 24px); max-width: none; }
+    }
+    `;
+    const s = document.createElement('style');
+    s.textContent = toastStyles;
+    document.head.appendChild(s);
+
+    // Create container
+    let container = document.querySelector('.toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+    }
+
+    window.showToast = function (message, type = 'info', duration = 3000, title = '') {
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+
+        const icon = document.createElement('div');
+        icon.className = 'toast-icon';
+        if (type === 'success') icon.textContent = '✓';
+        else if (type === 'error') icon.textContent = '!';
+        else icon.textContent = 'ℹ';
+
+        const body = document.createElement('div');
+        body.className = 'toast-body';
+        if (title) {
+            const t = document.createElement('div');
+            t.style.fontWeight = '800';
+            t.style.marginBottom = '4px';
+            t.textContent = title;
+            body.appendChild(t);
+        }
+        const msg = document.createElement('div');
+        msg.textContent = message;
+        body.appendChild(msg);
+
+        const close = document.createElement('div');
+        close.className = 'toast-close';
+        close.textContent = '✕';
+        close.setAttribute('role', 'button');
+        close.setAttribute('aria-label', 'Close notification');
+
+        toast.appendChild(icon);
+        toast.appendChild(body);
+        toast.appendChild(close);
+
+        container.appendChild(toast);
+
+        // show
+        requestAnimationFrame(() => {
+            toast.classList.add('show');
+        });
+
+        // auto remove
+        const timer = setTimeout(() => {
+            dismiss();
+        }, duration);
+
+        // dismiss function
+        function dismiss() {
+            clearTimeout(timer);
+            toast.classList.remove('show');
+            toast.addEventListener('transitionend', () => {
+                if (toast.parentNode) toast.parentNode.removeChild(toast);
+            });
+        }
+
+        close.addEventListener('click', dismiss);
+
+        // allow screen readers to announce (role alert)
+        toast.setAttribute('role', 'alert');
+
+        return {
+            dismiss,
+        };
+    };
+})();
+
+
 // Smooth scrolling for in-page anchors
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -20,7 +167,12 @@ document.querySelectorAll('.btn-product').forEach(button => {
         this.style.backgroundColor = '#28a745';
         this.textContent = 'Added!';
         setTimeout(() => {
-            alert(`${productName}${productPrice ? ` (${productPrice})` : ''} added to cart!`);
+            // Use showToast if available
+            if (typeof showToast === 'function') {
+                showToast(`${productName}${productPrice ? ` (${productPrice})` : ''} cart-д нэмэгдлээ`, 'success', 2000);
+            } else {
+                alert(`${productName}${productPrice ? ` (${productPrice})` : ''} added to cart!`);
+            }
             this.style.backgroundColor = '#000';
             this.textContent = 'Add to Cart';
         }, 1000);
@@ -38,12 +190,14 @@ if (newsletterBtn) {
             this.style.backgroundColor = '#28a745';
             this.textContent = 'Subscribed!';
             if (input) input.value = '';
+            if (typeof showToast === 'function') showToast('Электрон шуудан амжилттай бүртгэгдлээ', 'success', 2000);
             setTimeout(() => {
                 this.style.backgroundColor = '#fff';
                 this.textContent = 'Subscribe';
             }, 2000);
         } else {
-            alert('Please enter a valid email address');
+            if (typeof showToast === 'function') showToast('Зөв имэйл хаяг оруулна уу', 'error', 2400);
+            else alert('Please enter a valid email address');
         }
     });
 }
@@ -84,7 +238,11 @@ function runSearch(query) {
     if (typeof window.searchProducts === 'function') {
         window.searchProducts(query);
     } else {
-        alert(`Searching for: "${query}"`);
+        if (typeof showToast === 'function') {
+            showToast(`Хайлт: "${query}"`, 'info', 1800);
+        } else {
+            alert(`Searching for: "${query}"`);
+        }
     }
 }
 const searchIcon = document.querySelector('.search-icon');
@@ -103,7 +261,8 @@ if (cartIcon) {
         if (typeof window.openCart === 'function') {
             window.openCart();
         } else {
-            alert('Cart is empty. Add some products to see them here!');
+            if (typeof showToast === 'function') showToast('Сагс хоосон байна. Бүтээгдэхүүн нэмнэ үү', 'info', 1800);
+            else alert('Cart is empty. Add some products to see them here!');
         }
     });
 }
@@ -112,7 +271,8 @@ if (cartIcon) {
 const profileIcon = document.querySelector('.profile-icon');
 if (profileIcon) {
     profileIcon.addEventListener('click', function() {
-        alert('Please log in to access your profile');
+        if (typeof showToast === 'function') showToast('Нэвтрэх шаардлагатай. Та нэвтэрнэ үү', 'info', 1800);
+        else alert('Please log in to access your profile');
     });
 }
 
