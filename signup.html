@@ -1,79 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Lining Club</title>
+    <title>Бүртгүүлэх - Lining Club</title>
+
+    <!-- Үндсэн стилүүд -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="auth.css">
+
+    <!-- Toast мэдэгдлийн стил (гоё анимэйшн) -->
+    <link rel="stylesheet" href="toast.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="auth-container">
-        <form class="auth-form" id="signupForm">
-            <h2>Create Your Account</h2>
-            <div class="form-group">
-                <label for="signup-name">Full Name</label>
-                <input type="text" id="signup-name" name="name" required>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" aria-label="Lining Club Home">
+                    <img src="project/assets/Lining-Club-Logo.jpg" alt="Lining Club" class="logo">
+                </a>
             </div>
-            <div class="form-group">
-                <label for="signup-email">Email Address</label>
-                <input type="email" id="signup-email" name="email" required autocomplete="username">
-            </div>
-            <div class="form-group">
-                <label for="signup-phone">Утасны дугаар</label>
-                <input type="tel" id="signup-phone" name="phone" required>
-            </div>
-            <div class="form-group">
-                <label for="signup-password">Нууц үгээ оруулна уу</label>
-                <input type="password" id="signup-password" name="password" required autocomplete="new-password">
-            </div>
-            <button type="submit" class="btn-auth">Sign Up</button>
-            <div class="auth-extra">
-                <a href="login.html">Нэвтрэх</a>
-            </div>
-        </form>
-    </div>
+            <ul class="nav-menu" role="menubar" aria-label="Main navigation">
+                <li role="none"><a role="menuitem" href="index.html" class="nav-link">Нүүр</a></li>
+                <li role="none"><a role="menuitem" href="men.html" class="nav-link">Men</a></li>
+                <li role="none"><a role="menuitem" href="women.html" class="nav-link">Women</a></li>
+            </ul>
+            <!-- nav-actions will be injected by script.js -->
+        </div>
+    </nav>
 
-    <script>
-        // Fallback toast if global not loaded
-        (function(){
-            if (typeof showToast === 'function') return;
-            window.showToast = function(msg, type='success', duration=2000, title='') {
-                try {
-                    const t = document.createElement('div');
-                    t.style.position = 'fixed';
-                    t.style.left = '50%';
-                    t.style.bottom = '28px';
-                    t.style.transform = 'translateX(-50%)';
-                    t.style.background = (type==='success')? 'linear-gradient(90deg,#28a745,#2ecc71)' : (type==='error')? 'linear-gradient(90deg,#ff4757,#ff6b6b)' : 'linear-gradient(90deg,#667EEA,#764BA2)';
-                    t.style.color = '#fff';
-                    t.style.padding = '12px 16px';
-                    t.style.borderRadius = '10px';
-                    t.style.boxShadow = '0 8px 24px rgba(0,0,0,0.3)';
-                    t.style.zIndex = 2000;
-                    t.style.fontWeight = 700;
-                    t.textContent = msg;
-                    document.body.appendChild(t);
-                    setTimeout(()=>{ t.style.opacity = '0'; t.addEventListener('transitionend', ()=>t.remove()); }, duration);
-                } catch(e){ alert(msg); }
-            };
-        })();
+    <!-- Signup form -->
+    <main>
+        <div class="auth-container" style="padding-top:120px;">
+            <form class="auth-form" id="signupForm" aria-label="Бүртгүүлэх форм">
+                <h2>Шинээр бүртгүүлэх</h2>
 
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Simple validation
-            const name = document.getElementById('signup-name').value.trim();
-            const email = document.getElementById('signup-email').value.trim();
-            const phone = document.getElementById('signup-phone').value.trim();
-            const pass = document.getElementById('signup-password').value.trim();
-            if (!name || !email || !phone || !pass) {
-                showToast('Бүх талбарыг бөглөнө үү', 'error', 2200);
-                return;
-            }
-            showToast('Амжилттай бүртгэгдлээ! Нэвтрэх хуудас руу шилжиж байна...', 'success', 1600, 'Баяр хүргэе!');
-            setTimeout(() => { window.location.href = "login.html"; }, 1600);
-        });
-    </script>
+                <div class="form-group">
+                    <label for="signup-name">Бүтэн нэр</label>
+                    <input type="text" id="signup-name" name="name" required placeholder="Жорж Иванов" autocomplete="name">
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-email">Имэйл</label>
+                    <input type="email" id="signup-email" name="email" required autocomplete="username" placeholder="example@mail.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-phone">Утасны дугаар</label>
+                    <input type="tel" id="signup-phone" name="phone" required placeholder="+976 99 123456" autocomplete="tel">
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-password">Нууц үг</label>
+                    <input type="password" id="signup-password" name="password" required placeholder="••••••••" autocomplete="new-password">
+                </div>
+
+                <button type="submit" class="btn-auth">Бүртгүүлэх</button>
+
+                <div class="auth-extra" style="margin-top:12px;">
+                    <a href="login.html">Аль хэдийн бүртгэлтэй? Нэвтрэх</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Scripts: toast.js must be loaded before script.js so showToast is available -->
+    <script src="toast.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Тайлбар:
+         - Энэ файл нь toast.js, script.js дээрх логиктой холбогдон ажиллана.
+         - script.js-д өмнө өгсөн логик (localStorage: liningclub_users, liningclub_current_user, header update, showToast ашиглах) байрлах ёстой.
+         - Хэрэв таны төслийн script.js дээр showToast-ийг дахин тодорхойлсон байвал давхцал гарах тул хуучин inline fallback кодыг устгаарай.
+    -->
 </body>
 </html>
