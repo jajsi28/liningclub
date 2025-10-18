@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail - Lining Club</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="product-detail.css">
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="project/assets/Lining-Club-Logo.png" alt="Lining Club Logo" class="logo">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="men.html" class="nav-link">Men</a></li>
+                <li><a href="women.html" class="nav-link">Women</a></li>
+                <li><a href="kids.html" class="nav-link">Kids</a></li>
+                <li><a href="sale.html" class="nav-link">Sale</a></li>
+                <li><a href="snkrs.html" class="nav-link">SNKRS</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="search-icon">🔍</div>
+                <div class="cart-icon">🛒 <span class="cart-count">0</span></div>
+                <div class="profile-icon">👤</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Product Detail Section -->
+    <section class="product-detail-section">
+        <div class="container product-detail-container">
+            <!-- Product Images Carousel -->
+            <div class="product-images">
+                <img src="https://static.nike.com/a/images/f_auto/dpr_1.0,cs_srgb/w_1920,c_limit/4b1a2b0a-3b5c-4b5a-8b5a-3b5c4b5a8b5a/air-jordan-1-retro-high-og-mens-shoes-6GdF9n.png" id="mainProductImage" alt="Product Main Image">
+                <div class="product-thumbnails">
+                    <img src="https://static.nike.com/a/images/f_auto/dpr_1.0,cs_srgb/w_1920,c_limit/4b1a2b0a-3b5c-4b5a-8b5a-3b5c4b5a8b5a/air-jordan-1-retro-high-og-mens-shoes-6GdF9n.png" class="thumb active" alt="Thumb 1">
+                    <img src="https://static.nike.com/a/images/f_auto/dpr_1.0,cs_srgb/w_1920,c_limit/4b1a2b0a-3b5c-4b5a-8b5a-3b5c4b5a8b5a/air-jordan-1-retro-high-og-mens-shoes-6GdF9n.png" class="thumb" alt="Thumb 2">
+                    <img src="https://static.nike.com/a/images/f_auto/dpr_1.0,cs_srgb/w_1920,c_limit/4b1a2b0a-3b5c-4b5a-8b5a-3b5c4b5a8b5a/air-jordan-1-retro-high-og-mens-shoes-6GdF9n.png" class="thumb" alt="Thumb 3">
+                </div>
+            </div>
+            <!-- Product Info -->
+            <div class="product-info-detail">
+                <h1 class="product-title">Air Jordan 1 Retro High OG</h1>
+                <div class="product-rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star-half">☆</span>
+                    <span class="rating-count">(47 reviews)</span>
+                </div>
+                <div class="product-price-detail">
+                    <span class="old-price">$200</span>
+                    <span class="price">$170</span>
+                    <span class="badge sale">SALE</span>
+                </div>
+                <div class="product-desc">
+                    <p>Experience the legend. The Air Jordan 1 Retro High OG delivers premium comfort and iconic style for the modern athlete.</p>
+                </div>
+                <div class="product-options">
+                    <div class="option-group">
+                        <label for="sizeSelect">Size:</label>
+                        <select id="sizeSelect">
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label for="qtySelect">Quantity:</label>
+                        <input type="number" id="qtySelect" value="1" min="1" max="5">
+                    </div>
+                </div>
+                <div class="product-actions">
+                    <button class="btn-product add-to-cart">Add to Cart</button>
+                    <button class="btn-wishlist-detail" id="wishlistBtn">♡ Wishlist</button>
+                </div>
+                <div class="product-meta">
+                    <p><strong>Category:</strong> Shoes</p>
+                    <p><strong>SKU:</strong> AJ1-OG-2025</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Tabs: Description, Reviews, Related -->
+    <section class="product-tabs-section">
+        <div class="container">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="desc">Description</button>
+                <button class="tab-btn" data-tab="reviews">Reviews</button>
+                <button class="tab-btn" data-tab="related">Related</button>
+            </div>
+            <div class="tab-content" id="descTab">
+                <h2>Product Description</h2>
+                <p>
+                    The Air Jordan 1 Retro High OG combines heritage style with premium materials and superior comfort. Inspired by Michael Jordan's original signature shoe, this iconic silhouette features a supportive high-cut collar, durable leather overlays, and classic colorways that never go out of style.
+                </p>
+            </div>
+            <div class="tab-content" id="reviewsTab" style="display:none;">
+                <h2>Customer Reviews</h2>
+                <div class="reviews-list">
+                    <div class="review-item">
+                        <div class="review-author">Батболд <span class="review-stars">★★★★☆</span></div>
+                        <div class="review-text">Маш гоё, хөлд эвтэйхэн пүүз байна. Хүргэлт хурдан ирсэн!</div>
+                    </div>
+                    <div class="review-item">
+                        <div class="review-author">Anu <span class="review-stars">★★★★★</span></div>
+                        <div class="review-text">Хэмжээ яг таарсан, чанар үнэхээр таалагдсан.</div>
+                    </div>
+                    <!-- Add more reviews as needed -->
+                </div>
+                <form class="add-review-form">
+                    <h3>Write a Review</h3>
+                    <input type="text" placeholder="Your name" required>
+                    <select required>
+                        <option value="">Rating</option>
+                        <option value="5">★★★★★</option>
+                        <option value="4">★★★★☆</option>
+                        <option value="3">★★★☆☆</option>
+                        <option value="2">★★☆☆☆</option>
+                        <option value="1">★☆☆☆☆</option>
+                    </select>
+                    <textarea placeholder="Your review" required></textarea>
+                    <button type="submit" class="btn-product">Submit</button>
+                </form>
+            </div>
+            <div class="tab-content" id="relatedTab" style="display:none;">
+                <h2>Related Products</h2>
+                <div class="related-products-grid">
+                    <div class="related-card">
+                        <img src="https://static.nike.com/a/images/f_auto/dpr_1.0,cs_srgb/w_1920,c_limit/4b1a2b0a-3b5c-4b5a-8b5a-3b5c4b5a8b5a/air-force-1-07-mens-shoes-5QFp5Z.png" alt="Air Force 1">
+                        <div class="related-info">
+                            <div class="related-name">Air Force 1 '07</div>
+                            <div class="related-price">$90</div>
+                        </div>
+                    </div>
+                    <div class="related-card">
+                        <img src="https://static.nike.com/a/images/f_auto/dpr_1.0,cs_srgb/w_1920,c_limit/4b1a2b0a-3b5c-4b5a-8b5a-3b5c4b5a8b5a/dunk-low-mens-shoes-4QKq1q.png" alt="Nike Dunk Low">
+                        <div class="related-info">
+                            <div class="related-name">Nike Dunk Low</div>
+                            <div class="related-price">$100</div>
+                        </div>
+                    </div>
+                    <!-- Add more related cards as needed -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Help Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📘</a>
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">🐦</a>
+                        <a href="#" class="social-link">📺</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Lining Club, Inc. All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="product-detail.js"></script>
+</body>
+</html>

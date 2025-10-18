@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist - Lining Club</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="wishlist.css">
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html"><img src="project/assets/Lining-Club-Logo.png" alt="Logo" class="logo"></a>
+            </div>
+        </div>
+    </nav>
+    <section class="wishlist-section">
+        <div class="container">
+            <h1>Your Wishlist</h1>
+            <div class="wishlist-grid">
+                <!-- Demo Wishlist Items -->
+                <div class="wishlist-card">
+                    <img src="https://static.nike.com/a/images/f_auto/dpr_1.0,cs_srgb/w_1920,c_limit/4b1a2b0a-3b5c-4b5a-8b5a-3b5c4b5a8b5a/air-jordan-1-retro-high-og-mens-shoes-6GdF9n.png" alt="Air Jordan 1">
+                    <div>
+                        <div class="wishlist-name">Air Jordan 1 Retro High OG</div>
+                        <div class="wishlist-price">$170</div>
+                        <button class="btn-product">Add to Cart</button>
+                        <button class="btn-remove">Remove</button>
+                    </div>
+                </div>
+                <div class="wishlist-card">
+                    <img src="https://static.nike.com/a/images/f_auto/dpr_1.0,cs_srgb/w_1920,c_limit/4b1a2b0a-3b5c-4b5a-8b5a-3b5c4b5a8b5a/sportswear-mens-hoodie-4QKq1q.png" alt="Nike Hoodie">
+                    <div>
+                        <div class="wishlist-name">Nike Sportswear Hoodie</div>
+                        <div class="wishlist-price">$85</div>
+                        <button class="btn-product">Add to Cart</button>
+                        <button class="btn-remove">Remove</button>
+                    </div>
+                </div>
+            </div>
+            <div class="wishlist-empty" style="display:none;">
+                <h3>Your wishlist is empty.</h3>
+                <a href="index.html" class="btn-product">Shop Now</a>
+            </div>
+        </div>
+    </section>
+    <script>
+    // Demo remove
+    document.querySelectorAll('.btn-remove').forEach(btn=>{
+        btn.addEventListener('click', function(){
+            this.closest('.wishlist-card').remove();
+            if(document.querySelectorAll('.wishlist-card').length === 0){
+                document.querySelector('.wishlist-empty').style.display = 'block';
+            }
+        });
+    });
+    </script>
+</body>
+</html>

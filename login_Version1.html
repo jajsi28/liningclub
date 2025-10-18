@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Lining Club</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="auth.css">
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-container">
+        <form class="auth-form" id="loginForm">
+            <h2>Login to Your Account</h2>
+            <div class="form-group">
+                <label for="login-email">Email Address</label>
+                <input type="email" id="login-email" name="email" required autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" name="password" required autocomplete="current-password">
+            </div>
+            <button type="submit" class="btn-auth">Login</button>
+            <div class="auth-extra">
+                <a href="signup.html">Don't have an account? Sign up</a>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Simple form validation
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value.trim();
+            const pass = document.getElementById('login-password').value.trim();
+            if (!email || !pass) return alert('Please fill in all fields.');
+            // Fake login: just show success
+            alert('Login successful! (Demo only)');
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+</html>
