@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Admin Panel - Lining Club</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="admin-wrapper">
+        <header class="admin-header">
+            <div class="container">
+                <h1>Админ самбар</h1>
+                <div class="admin-actions">
+                    <button id="btn-logout" class="btn-admin-logout">Гарах</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="admin-main container">
+            <aside class="admin-side">
+                <nav>
+                    <ul>
+                        <li><a href="#dashboard" class="active">Хяналтын самбар</a></li>
+                        <li><a href="#orders">Захиалгууд</a></li>
+                        <li><a href="#products">Бүтээгдэхүүн</a></li>
+                        <li><a href="#users">Хэрэглэгчид</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <section class="admin-content">
+                <section id="dashboard">
+                    <h2>Хураангуй</h2>
+                    <div class="cards">
+                        <div class="card">
+                            <h3>Нийт захиалга</h3>
+                            <p id="totalOrders">0</p>
+                        </div>
+                        <div class="card">
+                            <h3>Нийт бүтээгдэхүүн</h3>
+                            <p id="totalProducts">0</p>
+                        </div>
+                        <div class="card">
+                            <h3>Идэвхтэй хэрэглэгч</h3>
+                            <p id="totalUsers">0</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="orders" style="display:none;">
+                    <h2>Захиалгууд</h2>
+                    <p>Энд захиалгын жагсаалт гаргана (Demo)</p>
+                </section>
+
+                <section id="products" style="display:none;">
+                    <h2>Бүтээгдэхүүн</h2>
+                    <p>Энд бүтээгдэхүүн нэмэх/засах боломж (Demo)</p>
+                </section>
+
+                <section id="users" style="display:none;">
+                    <h2>Хэрэглэгчид</h2>
+                    <p>Энд хэрэглэгчийн мэдээлэл харагдана (Demo)</p>
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Simple guard: if not logged in, redirect to admin-login.html
+        if (sessionStorage.getItem('adminLogged') !== 'true') {
+            alert('Админ хандах эрх байхгүй байна. Та нэвтэрнэ үү.');
+            window.location.href = 'admin-login.html';
+        }
+
+        // Demo stats (could be filled from localStorage or API)
+        document.getElementById('totalOrders').textContent = '5';
+        document.getElementById('totalProducts').textContent = '24';
+        document.getElementById('totalUsers').textContent = '102';
+
+        // Logout
+        document.getElementById('btn-logout').addEventListener('click', function() {
+            sessionStorage.removeItem('adminLogged');
+            window.location.href = 'admin-login.html';
+        });
+
+        // Side nav interactions
+        document.querySelectorAll('.admin-side nav ul li a').forEach(link=>{
+            link.addEventListener('click', function(e){
+                e.preventDefault();
+                document.querySelectorAll('.admin-side nav ul li a').forEach(l=>l.classList.remove('active'));
+                this.classList.add('active');
+                const target = this.getAttribute('href').substring(1);
+                document.querySelectorAll('.admin-content section').forEach(sec=>{
+                    sec.style.display = sec.id === target ? 'block' : 'none';
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

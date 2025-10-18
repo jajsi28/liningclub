@@ -1,0 +1,94 @@
+/* Simple admin panel styles (admin.css) */
+
+.admin-header {
+    background: linear-gradient(135deg,#2c3e50 0%, #34495e 100%);
+    color: #fff;
+    padding: 20px 0;
+    margin-bottom: 24px;
+}
+.admin-header h1 {
+    font-size: 1.6rem;
+    margin: 0;
+    display: inline-block;
+}
+.admin-actions {
+    float: right;
+}
+.btn-admin-logout {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: none;
+    background: #ff4757;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+.admin-main {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+.admin-side {
+    width: 220px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+.admin-side nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.admin-side nav ul li {
+    margin-bottom: 8px;
+}
+.admin-side nav ul li a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+}
+.admin-side nav ul li a.active, .admin-side nav ul li a:hover {
+    background: linear-gradient(90deg,#667EEA,#764BA2);
+    color: #fff;
+}
+.admin-content {
+    flex: 1;
+    background: #fff;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+    gap: 12px;
+    margin-top: 12px;
+}
+.card {
+    padding: 14px;
+    border-radius: 8px;
+    background: linear-gradient(180deg,#fff,#fafafa);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    text-align: center;
+}
+.card h3 {
+    margin: 0 0 8px 0;
+    font-size: 0.95rem;
+    color: #666;
+}
+.card p {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin: 0;
+    color: #222;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .admin-main { flex-direction: column; }
+    .admin-side { width: 100%; order: 2; }
+}
